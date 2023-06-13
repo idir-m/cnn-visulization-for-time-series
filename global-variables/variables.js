@@ -6,7 +6,7 @@ const height = chart.offsetHeight;
 const rectHeight = 44;
 const rectWidth = 44;
 
-const modalWidth = 600;
+const modalWidth = 1050;
 const modalHeight = 400;
 
 

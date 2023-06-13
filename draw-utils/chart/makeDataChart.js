@@ -1,6 +1,6 @@
 import layers from '../../data/dataGenerator.js'
 
-
+//Récupération des id des layers dans un tableau
 const idLayers = () => {
     const layersElements = document.querySelectorAll('.layer')
 
@@ -13,7 +13,7 @@ const idLayers = () => {
     return id
 }
 
-
+//Création d'un tableau à 3D contenant les données de chaque layer
 const layersDataOrganized = () => {
     let layersData = []
 
@@ -43,6 +43,7 @@ const layersDataOrganized = () => {
             layersData.push(nodesData)
         }
     })
+
     return layersData;
 }
 

@@ -34,7 +34,6 @@ text:hover {
     stroke: rgba(0, 0, 0, 1);
 }
 
-
 .material-symbols-outlined {
     font-variation-settings:
         'FILL' 0,
@@ -80,13 +79,4 @@ rect {
 
 rect:hover {
     stroke: rgba(0, 0, 0, 1);
-}
-
-#tooltip {
-    border: 1px solid #ccc;
-    position: absolute;
-    padding: 10px;
-    background-color: #fff;
-    display: none;
-    pointer-events: none;
 }

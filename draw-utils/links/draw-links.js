@@ -2,8 +2,7 @@ import constructCnnLinkingData from "./makeDataLinks"
 import { linkHorizontal, easeLinear } from "d3"
 import { rectSize } from "../../global-variables/variables"
 
-
-
+//Méthode pour générer les liens entre les rectangles
 const linkCnnWhithD3 = () => {
 
     let cnnLinks = []
@@ -21,7 +20,7 @@ const linkCnnWhithD3 = () => {
     return cnnLinks;
 }
 
-
+//Méthode pour déssiner les liens entre les rectangles
 const drawLinks = (selection) => {
     const cnnLinks = linkCnnWhithD3();
     for (let i = 0; i < cnnLinks.length; i++) {
