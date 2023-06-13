@@ -46,6 +46,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
     color: var(--light-200);
+
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
@@ -166,6 +167,8 @@ select {
     padding: .5rem 1rem;
     border-radius: .6rem;
     background-color: var(--blue-500);
+    text-decoration: none;
+    color: var(--light-200);
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;

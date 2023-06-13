@@ -1,0 +1,92 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+text {
+    font-size: 0.5rem;
+    color: #000;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+text:hover {
+    font-size: 0.6rem;
+    transform: translateZ(0) scale(1.5);
+}
+
+.chart {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.cnn-link {
+    pointer-events: all;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.cnn-link:hover {
+    stroke: rgba(0, 0, 0, 1);
+}
+
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 600,
+        'GRAD' 0,
+        'opsz' 48
+}
+
+.modal {
+    border: none;
+    border-radius: .4rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .2);
+    position: relative;
+}
+
+
+.close-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    width: auto;
+    height: auto;
+}
+
+.node {
+    cursor: pointer;
+}
+
+rect {
+    transition: all 0.2s ease-in-out;
+}
+
+rect:hover {
+    stroke: rgba(0, 0, 0, 1);
+}
+
+#tooltip {
+    border: 1px solid #ccc;
+    position: absolute;
+    padding: 10px;
+    background-color: #fff;
+    display: none;
+    pointer-events: none;
+}
