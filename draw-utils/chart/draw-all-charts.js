@@ -8,7 +8,7 @@ const layersData = layersDataOrganized();
 
 const modal = document.querySelector('.modal')
 
-const onClickRect = (e, i, j, yRange) => {
+const onClickRect = (i, j, yRange) => {
     const data = layersData[i][j]
 
 
@@ -27,10 +27,7 @@ const onClickRect = (e, i, j, yRange) => {
     makeChartModal(data, g, yRange, modalSize.width, modalSize.height)
     modal.showModal();
 
-
 }
-
-
 
 
 const drawAllCharts = (selection) => {
@@ -62,12 +59,16 @@ const drawAllCharts = (selection) => {
             maxRange[0] = maxRange[1] * -1
         }
 
+        if (i < id.length - 1) {
+            layersData[i].forEach((nodeData, j) => {
+                nodes._groups[0][j].addEventListener('click', () => onClickRect(i, j, maxRange))
+                makeChart(nodeData, select(nodes._groups[0][j]), maxRange, rectSize.width, rectSize.height)
+            })
+        }
 
-        layersData[i].forEach((nodeData, j) => {
-            nodes._groups[0][j].addEventListener('click', (e) => onClickRect(e, i, j, maxRange))
-            makeChart(nodeData, select(nodes._groups[0][j]), maxRange, rectSize.width, rectSize.height)
-        })
     })
+
+    console.log(layersData[layersData.length - 1])
 
 
     const closeModal = document.querySelector('.close-btn')

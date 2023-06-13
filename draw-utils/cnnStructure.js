@@ -1,4 +1,4 @@
-import { selectAll, range } from 'd3'
+import { range } from 'd3'
 import layers from '../data/dataGenerator.js'
 import { svgSize, rectSize } from '../global-variables/variables.js'
 
@@ -28,7 +28,7 @@ const drawCnn = (selection) => {
         .attr('stroke', 'rgba(0, 0, 0, 0.5)')
 
 
-    selectAll('.layer')
+    selection.selectAll('.layer')
         .append('text')
         .text(d => d.name)
         .attr('y', 20)
@@ -37,7 +37,8 @@ const drawCnn = (selection) => {
         .attr('transform', `translate(0, ${svgSize.height / 2 - 20})`)
 
     selection.select('#output-layer .node')
-        .attr('transform', `translate(0, ${svgSize.height / 2 - 20})`)
+        .attr('transform', `translate(0, ${svgSize.height / 2 - 50})`)
+
 }
 
 

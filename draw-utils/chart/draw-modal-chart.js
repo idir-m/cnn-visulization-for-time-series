@@ -1,5 +1,5 @@
 import { scaleLinear, extent, line, axisLeft, axisBottom, pointer, bisector, select } from 'd3'
-import { modalSize, svgSize } from '../../global-variables/variables'
+
 
 
 

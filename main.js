@@ -1,10 +1,9 @@
 import './cnn.css'
 import {
-    select, linkHorizontal, easeLinear
+    select
 } from 'd3'
 
-import layers from './data/dataGenerator.js'
-import { svgSize, rectSize } from './global-variables/variables';
+import { svgSize } from './global-variables/variables';
 
 import drawCnn from './draw-utils/cnnStructure.js'
 import drawAllCharts from './draw-utils/chart/draw-all-charts.js'
