@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>draw-utils/cnnStructure.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cnnStructure.html">cnnStructure</a><ul class='methods'><li data-type='method'><a href="module-cnnStructure.html#~drawCnn">drawCnn</a></li></ul></li><li><a href="module-dataGenerator.html">dataGenerator</a><ul class='methods'><li data-type='method'><a href="module-dataGenerator.html#~readFiles">readFiles</a></li></ul></li><li><a href="module-draw-all-charts.html">draw-all-charts</a><ul class='methods'><li data-type='method'><a href="module-draw-all-charts.html#~drawAllCharts">drawAllCharts</a></li><li data-type='method'><a href="module-draw-all-charts.html#~onClickRect">onClickRect</a></li><li data-type='method'><a href="module-draw-all-charts.html#~onClickRectActivation">onClickRectActivation</a></li></ul></li><li><a href="module-draw-chart.html">draw-chart</a><ul class='methods'><li data-type='method'><a href="module-draw-chart.html#~makeChart">makeChart</a></li></ul></li><li><a href="module-draw-links.html">draw-links</a><ul class='methods'><li data-type='method'><a href="module-draw-links.html#~drawLinks">drawLinks</a></li><li data-type='method'><a href="module-draw-links.html#~linkCnnWhithD3">linkCnnWhithD3</a></li></ul></li><li><a href="module-draw-modal-chart.html">draw-modal-chart</a><ul class='methods'><li data-type='method'><a href="module-draw-modal-chart.html#~makeChartModal">makeChartModal</a></li></ul></li><li><a href="module-draw-output-rects.html">draw-output-rects</a><ul class='methods'><li data-type='method'><a href="module-draw-output-rects.html#~drawOutputRects">drawOutputRects</a></li></ul></li><li><a href="module-makeDataChart.html">makeDataChart</a><ul class='methods'><li data-type='method'><a href="module-makeDataChart.html#~idLayers">idLayers</a></li><li data-type='method'><a href="module-makeDataChart.html#~layersDataOrganized">layersDataOrganized</a></li></ul></li><li><a href="module-makeDataLinks.html">makeDataLinks</a><ul class='methods'><li data-type='method'><a href="module-makeDataLinks.html#~constructCnnLinkingData">constructCnnLinkingData</a></li><li data-type='method'><a href="module-makeDataLinks.html#~getRectsCoordinates">getRectsCoordinates</a></li><li data-type='method'><a href="module-makeDataLinks.html#~linkEachRectToCoordinates">linkEachRectToCoordinates</a></li></ul></li><li><a href="module-makeOutputData.html">makeOutputData</a><ul class='methods'><li data-type='method'><a href="module-makeOutputData.html#~generateOutputData">generateOutputData</a></li></ul></li><li><a href="module-variables.html">variables</a></li></ul><h3>Global</h3><ul><li><a href="global.html#drawAllCharts">drawAllCharts</a></li><li><a href="global.html#drawCnn">drawCnn</a></li><li><a href="global.html#drawLinks">drawLinks</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">draw-utils/cnnStructure.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module cnnStructure
+ */
+
+
+import { range, selectAll } from 'd3'
+import layers from '../data/dataGenerator.js'
+import { svgSize, rectSize } from '../global-variables/variables.js'
+
+
+/**
+ * La fonction drawCnn génère la structure complète d'un réseau neuronal convolutif (CNN).
+ * &lt;ol>
+  &lt;li>Crée un groupe principal (conteneur) dans la sélection spécifiée, avec une transformation appliquée pour le positionnement.&lt;/li>
+  &lt;li>Ajoute ensuite un groupe pour chaque couche dans les données de 'layers', en positionnant chaque groupe en fonction de son index.&lt;/li>
+  &lt;li>Chaque groupe de couche reçoit un ID basé sur le nom de la couche et une classe de 'layer'.&lt;/li>
+  &lt;li>Dans chaque groupe de couche, un groupe supplémentaire est ajouté pour chaque noeud dans la couche, encore une fois positionné en fonction de son index.&lt;/li>
+  &lt;li>Dans chaque noeud, un rectangle est dessiné avec les dimensions spécifiées, rempli de blanc et avec un trait noir.&lt;/li>
+  &lt;li>Après avoir ajouté tous les noeuds, un élément texte est ajouté à chaque couche avec le nom de la couche comme contenu.&lt;/li>
+  &lt;li>Enfin, les groupes de noeuds des couches d'entrée et de sortie sont repositionnés pour être centrés verticalement.&lt;/li>
+&lt;/ol>
+ * @param {d3.Selection} selection - La sélection d'éléments DOM où le CNN sera dessiné.
+ *
+ * 
+ */
+
+const drawCnn = (selection) => {
+    selection
+        //Création du conteneur principal
+        .append('g')
+        .attr('class', 'container')
+        .attr('transform', `translate(${svgSize.width / 6 - 40}, 0)`)
+        .selectAll('g')
+        .data(layers)
+        .enter()
+        //Création des layers
+        .append('g')
+        .attr('transform', (d, i) => `translate(${(i + 1) * 70 + Math.floor((i - 1) / 3) * 70}, 0)`)
+        .attr('id', (d) => d.name.replace(/\s/g, '-').toLowerCase())
+        .attr('class', 'layer')
+        .selectAll('g')
+        .data(d => range(d.nodes))
+        .enter()
+        //Création des nodes
+        .append('g')
+        .attr('class', (i) => `node node-${i}`)
+        .attr('transform', (i) => `translate(0, ${(i + 1) * 50 + 40})`)
+        .append('rect')
+        .attr('width', rectSize.width)
+        .attr('height', rectSize.height)
+        .attr('fill', 'white')
+        .attr('stroke', 'rgba(0, 0, 0, 0.5)')
+
+
+    selectAll('.layer')
+        .append('text')
+        .text(d => d.name)
+        .attr('y', 20)
+
+    //Cetrer les layers input et output
+    selection.select('#input .node')
+        .attr('transform', `translate(0, ${svgSize.height / 2 - 20})`)
+
+    selection.select('#output .node')
+        .attr('transform', `translate(0, ${svgSize.height / 2 - 50})`)
+
+
+
+
+}
+
+
+
+export default drawCnn;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Wed Jun 14 2023 05:53:37 GMT+0200 (heure d’été d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

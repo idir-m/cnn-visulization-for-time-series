@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>dataGenerator - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cnnStructure.html">cnnStructure</a><ul class='methods'><li data-type='method'><a href="module-cnnStructure.html#~drawCnn">drawCnn</a></li></ul></li><li><a href="module-dataGenerator.html">dataGenerator</a><ul class='methods'><li data-type='method'><a href="module-dataGenerator.html#~readFiles">readFiles</a></li></ul></li><li><a href="module-draw-all-charts.html">draw-all-charts</a><ul class='methods'><li data-type='method'><a href="module-draw-all-charts.html#~drawAllCharts">drawAllCharts</a></li><li data-type='method'><a href="module-draw-all-charts.html#~onClickRect">onClickRect</a></li><li data-type='method'><a href="module-draw-all-charts.html#~onClickRectActivation">onClickRectActivation</a></li></ul></li><li><a href="module-draw-chart.html">draw-chart</a><ul class='methods'><li data-type='method'><a href="module-draw-chart.html#~makeChart">makeChart</a></li></ul></li><li><a href="module-draw-links.html">draw-links</a><ul class='methods'><li data-type='method'><a href="module-draw-links.html#~drawLinks">drawLinks</a></li><li data-type='method'><a href="module-draw-links.html#~linkCnnWhithD3">linkCnnWhithD3</a></li></ul></li><li><a href="module-draw-modal-chart.html">draw-modal-chart</a><ul class='methods'><li data-type='method'><a href="module-draw-modal-chart.html#~makeChartModal">makeChartModal</a></li></ul></li><li><a href="module-draw-output-rects.html">draw-output-rects</a><ul class='methods'><li data-type='method'><a href="module-draw-output-rects.html#~drawOutputRects">drawOutputRects</a></li></ul></li><li><a href="module-makeDataChart.html">makeDataChart</a><ul class='methods'><li data-type='method'><a href="module-makeDataChart.html#~idLayers">idLayers</a></li><li data-type='method'><a href="module-makeDataChart.html#~layersDataOrganized">layersDataOrganized</a></li></ul></li><li><a href="module-makeDataLinks.html">makeDataLinks</a><ul class='methods'><li data-type='method'><a href="module-makeDataLinks.html#~constructCnnLinkingData">constructCnnLinkingData</a></li><li data-type='method'><a href="module-makeDataLinks.html#~getRectsCoordinates">getRectsCoordinates</a></li><li data-type='method'><a href="module-makeDataLinks.html#~linkEachRectToCoordinates">linkEachRectToCoordinates</a></li></ul></li><li><a href="module-makeOutputData.html">makeOutputData</a><ul class='methods'><li data-type='method'><a href="module-makeOutputData.html#~generateOutputData">generateOutputData</a></li></ul></li><li><a href="module-variables.html">variables</a></li></ul><h3>Global</h3><ul><li><a href="global.html#drawAllCharts">drawAllCharts</a></li><li><a href="global.html#drawCnn">drawCnn</a></li><li><a href="global.html#drawLinks">drawLinks</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">dataGenerator</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Exporte le tableau de couches par défaut.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_dataGenerator.js.html">data/dataGenerator.js</a>, <a href="data_dataGenerator.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+            
+                <div class="description usertext"><p>Exporte le tableau de couches par défaut.</p></div>
+            
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~readFiles"><span class="type-signature type-signature-async, inner">(async, inner) </span>readFiles<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Lit les fichiers CSV à partir des chemins spécifiés.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_dataGenerator.js.html">data/dataGenerator.js</a>, <a href="data_dataGenerator.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Une promesse résolue avec un tableau contenant les données des fichiers CSV.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array></span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="~Layer">Layer</h4>
+
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Structure de données représentant une couche.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_dataGenerator.js.html">data/dataGenerator.js</a>, <a href="data_dataGenerator.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>nodes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Le nombre de nœuds dans la couche.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Le nom de la couche.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>L'identifiant de la couche.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Les données de la couche.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description usertext">
+    <p>Structure de données représentant une couche.</p>
+</div>
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Wed Jun 14 2023 05:53:37 GMT+0200 (heure d’été d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

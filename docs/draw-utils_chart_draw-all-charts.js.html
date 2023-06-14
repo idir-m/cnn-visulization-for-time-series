@@ -1,4 +1,53 @@
-import makeChart from './draw-chart'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>draw-utils/chart/draw-all-charts.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cnnStructure.html">cnnStructure</a><ul class='methods'><li data-type='method'><a href="module-cnnStructure.html#~drawCnn">drawCnn</a></li></ul></li><li><a href="module-dataGenerator.html">dataGenerator</a><ul class='methods'><li data-type='method'><a href="module-dataGenerator.html#~readFiles">readFiles</a></li></ul></li><li><a href="module-draw-all-charts.html">draw-all-charts</a><ul class='methods'><li data-type='method'><a href="module-draw-all-charts.html#~drawAllCharts">drawAllCharts</a></li><li data-type='method'><a href="module-draw-all-charts.html#~onClickRect">onClickRect</a></li><li data-type='method'><a href="module-draw-all-charts.html#~onClickRectActivation">onClickRectActivation</a></li></ul></li><li><a href="module-draw-chart.html">draw-chart</a><ul class='methods'><li data-type='method'><a href="module-draw-chart.html#~makeChart">makeChart</a></li></ul></li><li><a href="module-draw-links.html">draw-links</a><ul class='methods'><li data-type='method'><a href="module-draw-links.html#~drawLinks">drawLinks</a></li><li data-type='method'><a href="module-draw-links.html#~linkCnnWhithD3">linkCnnWhithD3</a></li></ul></li><li><a href="module-draw-modal-chart.html">draw-modal-chart</a><ul class='methods'><li data-type='method'><a href="module-draw-modal-chart.html#~makeChartModal">makeChartModal</a></li></ul></li><li><a href="module-draw-output-rects.html">draw-output-rects</a><ul class='methods'><li data-type='method'><a href="module-draw-output-rects.html#~drawOutputRects">drawOutputRects</a></li></ul></li><li><a href="module-makeDataChart.html">makeDataChart</a><ul class='methods'><li data-type='method'><a href="module-makeDataChart.html#~idLayers">idLayers</a></li><li data-type='method'><a href="module-makeDataChart.html#~layersDataOrganized">layersDataOrganized</a></li></ul></li><li><a href="module-makeDataLinks.html">makeDataLinks</a><ul class='methods'><li data-type='method'><a href="module-makeDataLinks.html#~constructCnnLinkingData">constructCnnLinkingData</a></li><li data-type='method'><a href="module-makeDataLinks.html#~getRectsCoordinates">getRectsCoordinates</a></li><li data-type='method'><a href="module-makeDataLinks.html#~linkEachRectToCoordinates">linkEachRectToCoordinates</a></li></ul></li><li><a href="module-makeOutputData.html">makeOutputData</a><ul class='methods'><li data-type='method'><a href="module-makeOutputData.html#~generateOutputData">generateOutputData</a></li></ul></li><li><a href="module-variables.html">variables</a></li></ul><h3>Global</h3><ul><li><a href="global.html#drawAllCharts">drawAllCharts</a></li><li><a href="global.html#drawCnn">drawCnn</a></li><li><a href="global.html#drawLinks">drawLinks</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">draw-utils/chart/draw-all-charts.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import makeChart from './draw-chart'
 import makeChartModal from './draw-modal-chart'
 import { extent, min, max, select } from 'd3'
 import { idLayers, layersDataOrganized } from './makeDataChart'
@@ -70,53 +119,17 @@ const onClickRectActivation = (i, j, yRange, displayTracker) => {
         .attr('height', modalSize.height / 2)
 
 
-    //Ajout des labels pour les données d'entrée et de sortie dans la fenetre modal
-    svgModal.append('g')
-        .attr('transform', `translate(20, 25)`)
-        .append('text')
-        .attr('class', 'labelInput')
-        .attr('x', 50)
-        .attr('y', 15)
-        .text('Input')
-        .style('font-size', '20px')
-
-
-
-    svgModal.append('g')
-        .attr('transform', `translate(700, 25)`)
-        .append('text')
-        .attr('class', 'labelOutput')
-        .attr('x', 50)
-        .attr('y', 15)
-        .text('Output')
-        .style('font-size', '20px')
-
-    svgModal.append('g')
-        .attr('transform', `translate(400, 10)`)
-        .append('text')
-        .attr('class', 'labelHeader')
-        .attr('x', 50)
-        .attr('y', 15)
-        .text('Activation')
-        .style('font-size', '20px')
-        .style('font-weight', 'bold')
-
-
-
-
-    //Ajout des conteneurs pour les chartes des données d'entrée et de sortie dans la fenetre modal
     const g = svgModal.append('g')
-        .attr('transform', `translate(20, 30)`)
+        .attr('transform', `translate(20, 0)`)
 
     const g2 = svgModal.append('g')
-        .attr('transform', `translate(700, 30)`)
+        .attr('transform', `translate(700, 0)`)
 
 
-    //ajout de la grille pour la visualisation des données de la fonction d'activation
     const grid = modalContent.append('div')
         .attr('class', 'grid')
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i &lt; 3; i++) {
         if (i == 0) { grid.append('span').text('max( '); }
         if (i == 1) { grid.append('span').text(' , '); }
         if (i == 2) { grid.append('span').text(' ) = '); }
@@ -188,10 +201,10 @@ const drawAllCharts = (selection) => {
         }
         /////////////////////////////////////////
 
-        if (i < layersData.length - 1) {
+        if (i &lt; layersData.length - 1) {
             layersData[i].forEach((nodeData, j) => {
                 // Si la couche est une couche d'activation, on ajoute un événement au clic sur le rectangle avec la fonction onClickRectActivation (à modifier selon les besoins)
-                if (i !== 0 && i % 3 === 0) {
+                if (i !== 0 &amp;&amp; i % 3 === 0) {
                     nodes._groups[0][j].addEventListener('click', () => onClickRectActivation(i, j, maxRange, false))
                     makeChart(nodeData, select(nodes._groups[0][j]), maxRange, rectSize.width, rectSize.height)
                 } else {
@@ -217,3 +230,30 @@ export default drawAllCharts
 
 
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Wed Jun 14 2023 05:53:37 GMT+0200 (heure d’été d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

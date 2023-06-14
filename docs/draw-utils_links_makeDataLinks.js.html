@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>draw-utils/links/makeDataLinks.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cnnStructure.html">cnnStructure</a><ul class='methods'><li data-type='method'><a href="module-cnnStructure.html#~drawCnn">drawCnn</a></li></ul></li><li><a href="module-dataGenerator.html">dataGenerator</a><ul class='methods'><li data-type='method'><a href="module-dataGenerator.html#~readFiles">readFiles</a></li></ul></li><li><a href="module-draw-all-charts.html">draw-all-charts</a><ul class='methods'><li data-type='method'><a href="module-draw-all-charts.html#~drawAllCharts">drawAllCharts</a></li><li data-type='method'><a href="module-draw-all-charts.html#~onClickRect">onClickRect</a></li><li data-type='method'><a href="module-draw-all-charts.html#~onClickRectActivation">onClickRectActivation</a></li></ul></li><li><a href="module-draw-chart.html">draw-chart</a><ul class='methods'><li data-type='method'><a href="module-draw-chart.html#~makeChart">makeChart</a></li></ul></li><li><a href="module-draw-links.html">draw-links</a><ul class='methods'><li data-type='method'><a href="module-draw-links.html#~drawLinks">drawLinks</a></li><li data-type='method'><a href="module-draw-links.html#~linkCnnWhithD3">linkCnnWhithD3</a></li></ul></li><li><a href="module-draw-modal-chart.html">draw-modal-chart</a><ul class='methods'><li data-type='method'><a href="module-draw-modal-chart.html#~makeChartModal">makeChartModal</a></li></ul></li><li><a href="module-draw-output-rects.html">draw-output-rects</a><ul class='methods'><li data-type='method'><a href="module-draw-output-rects.html#~drawOutputRects">drawOutputRects</a></li></ul></li><li><a href="module-makeDataChart.html">makeDataChart</a><ul class='methods'><li data-type='method'><a href="module-makeDataChart.html#~idLayers">idLayers</a></li><li data-type='method'><a href="module-makeDataChart.html#~layersDataOrganized">layersDataOrganized</a></li></ul></li><li><a href="module-makeDataLinks.html">makeDataLinks</a><ul class='methods'><li data-type='method'><a href="module-makeDataLinks.html#~constructCnnLinkingData">constructCnnLinkingData</a></li><li data-type='method'><a href="module-makeDataLinks.html#~getRectsCoordinates">getRectsCoordinates</a></li><li data-type='method'><a href="module-makeDataLinks.html#~linkEachRectToCoordinates">linkEachRectToCoordinates</a></li></ul></li><li><a href="module-makeOutputData.html">makeOutputData</a><ul class='methods'><li data-type='method'><a href="module-makeOutputData.html#~generateOutputData">generateOutputData</a></li></ul></li><li><a href="module-variables.html">variables</a></li></ul><h3>Global</h3><ul><li><a href="global.html#drawAllCharts">drawAllCharts</a></li><li><a href="global.html#drawCnn">drawCnn</a></li><li><a href="global.html#drawLinks">drawLinks</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">draw-utils/links/makeDataLinks.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import layers from "../../data/dataGenerator"
+
+/**
+ * @module makeDataLinks
+ * @description Ce module fournit des fonctions pour récupérer les coordonnées des rectangles, les lier à leurs coordonnées respectives, 
+ * et construire les données de liens entre ces rectangles en fonction de leur position dans différentes couches.
+ */
+
+
+/**
+ * Fonction pour obtenir les coordonnées de tous les rectangles de données.
+ * @returns {Object[]} - Un tableau d'objets où chaque objet représente un rectangle de données et contient ses coordonnées x et y.
+ */
+const getRectsCoordinates = () => {
+
+    const g = document.querySelectorAll('.node')
+
+    let nodesCoordinates = []
+
+    g.forEach((d) => {
+        const rect = d.getBoundingClientRect()
+        let x = rect.x + rect.width / 2
+        let y = rect.y + rect.height / 2
+        nodesCoordinates.push({ x: x, y: y })
+    })
+
+    return nodesCoordinates;
+}
+
+
+/**
+ * Fonction pour lier chaque rectangle à ses coordonnées, en attribuant également un ID de couche à chaque rectangle.
+ * @returns {Object[]} - Un tableau d'objets où chaque objet représente un lien entre un rectangle et ses coordonnées et ID de couche associés.
+ */
+const linkEachRectToCoordinates = () => {
+    let links = []
+    let index = 0;
+
+    const nodesCoordinates = getRectsCoordinates();
+
+    layers.forEach((d) => {
+        let tempLinks = []
+        for (let i = 0; i &lt; d.nodes; i++) {
+            tempLinks.push({ coordinates: nodesCoordinates[index], layer: d.id })
+            index++
+        }
+        links.push(tempLinks)
+    })
+
+
+    return links;
+}
+
+/**
+ * Fonction pour construire les données de liens entre les rectangles en fonction de leur position dans différentes couches. 
+ * Elle utilise les coordonnées des rectangles et leur appartenance à différentes couches pour créer ces liens.
+ * @returns {Object[]} - Un tableau d'objets où chaque objet représente un lien entre les rectangles avec leurs coordonnées et ID de layer associés.
+ */
+const constructCnnLinkingData = () => {
+    const links = linkEachRectToCoordinates();
+
+    let cnn = []
+
+    //On compare les layers de chaque rectangle pour savoir si on doit créer un lien entre eux
+    for (let i = 0; i &lt; links.length; i++) {
+        let temp = []
+        //Si on est au dernier layer, on arrête la boucle
+        if (i === links.length - 1) break;
+        //Si les layers sont identiques, on crée un lien entre les rectangles
+        if (links[i][0].layer === links[i + 1][0].layer) {
+            for (let j = 0; j &lt; links[i].length; j++) {
+                temp.push({ source: links[i][j].coordinates, target: links[i + 1][j].coordinates, s: links[i][j].layer, t: links[i + 1][j].layer })
+            }
+            cnn.push(temp)
+            //Sinon, on crée un lien entre chaque rectangle du layer i avec chaque rectangle du layer i+1
+        } else {
+            for (let j = 0; j &lt; links[i].length; j++) {
+                for (let p = 0; p &lt; links[i + 1].length; p++) {
+                    temp.push({ source: links[i][j].coordinates, target: links[i + 1][p].coordinates, s: links[i][j].layer, t: links[i + 1][p].layer })
+                }
+            }
+            cnn.push(temp)
+        }
+    }
+
+    return cnn;
+}
+
+export default constructCnnLinkingData;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Wed Jun 14 2023 05:53:37 GMT+0200 (heure d’été d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

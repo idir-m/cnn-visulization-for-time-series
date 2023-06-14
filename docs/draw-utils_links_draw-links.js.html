@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>draw-utils/links/draw-links.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cnnStructure.html">cnnStructure</a><ul class='methods'><li data-type='method'><a href="module-cnnStructure.html#~drawCnn">drawCnn</a></li></ul></li><li><a href="module-dataGenerator.html">dataGenerator</a><ul class='methods'><li data-type='method'><a href="module-dataGenerator.html#~readFiles">readFiles</a></li></ul></li><li><a href="module-draw-all-charts.html">draw-all-charts</a><ul class='methods'><li data-type='method'><a href="module-draw-all-charts.html#~drawAllCharts">drawAllCharts</a></li><li data-type='method'><a href="module-draw-all-charts.html#~onClickRect">onClickRect</a></li><li data-type='method'><a href="module-draw-all-charts.html#~onClickRectActivation">onClickRectActivation</a></li></ul></li><li><a href="module-draw-chart.html">draw-chart</a><ul class='methods'><li data-type='method'><a href="module-draw-chart.html#~makeChart">makeChart</a></li></ul></li><li><a href="module-draw-links.html">draw-links</a><ul class='methods'><li data-type='method'><a href="module-draw-links.html#~drawLinks">drawLinks</a></li><li data-type='method'><a href="module-draw-links.html#~linkCnnWhithD3">linkCnnWhithD3</a></li></ul></li><li><a href="module-draw-modal-chart.html">draw-modal-chart</a><ul class='methods'><li data-type='method'><a href="module-draw-modal-chart.html#~makeChartModal">makeChartModal</a></li></ul></li><li><a href="module-draw-output-rects.html">draw-output-rects</a><ul class='methods'><li data-type='method'><a href="module-draw-output-rects.html#~drawOutputRects">drawOutputRects</a></li></ul></li><li><a href="module-makeDataChart.html">makeDataChart</a><ul class='methods'><li data-type='method'><a href="module-makeDataChart.html#~idLayers">idLayers</a></li><li data-type='method'><a href="module-makeDataChart.html#~layersDataOrganized">layersDataOrganized</a></li></ul></li><li><a href="module-makeDataLinks.html">makeDataLinks</a><ul class='methods'><li data-type='method'><a href="module-makeDataLinks.html#~constructCnnLinkingData">constructCnnLinkingData</a></li><li data-type='method'><a href="module-makeDataLinks.html#~getRectsCoordinates">getRectsCoordinates</a></li><li data-type='method'><a href="module-makeDataLinks.html#~linkEachRectToCoordinates">linkEachRectToCoordinates</a></li></ul></li><li><a href="module-makeOutputData.html">makeOutputData</a><ul class='methods'><li data-type='method'><a href="module-makeOutputData.html#~generateOutputData">generateOutputData</a></li></ul></li><li><a href="module-variables.html">variables</a></li></ul><h3>Global</h3><ul><li><a href="global.html#drawAllCharts">drawAllCharts</a></li><li><a href="global.html#drawCnn">drawCnn</a></li><li><a href="global.html#drawLinks">drawLinks</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">draw-utils/links/draw-links.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import constructCnnLinkingData from "./makeDataLinks"
+import { linkHorizontal, easeLinear } from "d3"
+import { rectSize } from "../../global-variables/variables"
+
+/**
+ * @module draw-links
+ * @description Ce module fournit des fonctions pour générer des liens entre les rectangles en utilisant linkHorizontal et pour dessiner ces liens 
+ * sur la sélection d'éléments SVG donnée.
+ */
+
+
+/**
+ * Fonction pour générer les liens entre les rectangles. 
+ * Les liens sont représentés par des chemins de courbes horizontaux (path).
+ * @returns {string[]} - Un tableau de chaînes de caractères où chaque chaîne représente le chemin d'un lien entre les rectangles.
+ */
+const linkCnnWhithD3 = () => {
+
+    let cnnLinks = []
+    const cnn = constructCnnLinkingData();
+
+    cnn.forEach((d, i) => {
+        d.forEach((d, i) => {
+            cnnLinks.push(linkHorizontal()({
+                source: [d.source.x + rectSize.width / 2, d.source.y],
+                target: [d.target.x - rectSize.width / 2, d.target.y]
+            }))
+        })
+    })
+
+    return cnnLinks;
+}
+
+/**
+ * Fonction pour dessiner les liens entre les rectangles du réseau sur la sélection d'éléments SVG donnée. 
+ * Cette fonction utilise la fonction linkCnnWhithD3 pour générer les chemins de liens et les dessine ensuite sur la sélection.
+ * @param {Selection} selection - La sélection d'éléments SVG où les liens doivent être dessinés.
+ */
+const drawLinks = (selection) => {
+    const cnnLinks = linkCnnWhithD3();
+    for (let i = 0; i &lt; cnnLinks.length; i++) {
+        selection.append('path')
+            .attr('class', 'cnn-link')
+            .attr('d', cnnLinks[i])
+            .attr('stroke', '#fafafa')
+            .attr('fill', 'none')
+            .transition()
+            .delay((i + 0.5) * 20)
+            .ease(easeLinear)
+            .attr('stroke', 'rgba(0, 0, 0, 0.25)')
+    }
+}
+
+
+export default drawLinks;
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Wed Jun 14 2023 05:53:37 GMT+0200 (heure d’été d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
