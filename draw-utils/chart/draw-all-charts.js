@@ -186,6 +186,7 @@ const drawAllCharts = (selection) => {
         } else {
             maxRange[0] = maxRange[1] * -1
         }
+
         /////////////////////////////////////////
 
         if (i < layersData.length - 1) {

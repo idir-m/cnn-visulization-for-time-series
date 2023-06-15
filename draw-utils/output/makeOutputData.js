@@ -15,11 +15,11 @@ const generateOutputData = () => {
 
     const outputLayer = layersData[layersData.length - 1]
 
-    const descendingOutput = []
+    const outputTab = []
     outputLayer.forEach((data) => {
-        descendingOutput.push(...data.sort((a, b) => descending(parseFloat(a.value), parseFloat(b.value))))
+        outputTab.push(...data)
     })
-    return descendingOutput
+    return outputTab
 
 }
 

@@ -50,7 +50,7 @@ const drawCnn = (selection) => {
         .enter()
         //Création des nodes
         .append('g')
-        .attr('class', (i) => `node node-${i}`)
+        .attr('class', `node nodeRect`)
         .attr('transform', (i) => `translate(0, ${(i + 1) * 50 + 40})`)
         .append('rect')
         .attr('width', rectSize.width)

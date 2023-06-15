@@ -1,4 +1,5 @@
 import layers from "../../data/dataGenerator"
+import generateOutputData from "../output/makeOutputData"
 
 /**
  * @module makeDataLinks
@@ -13,7 +14,10 @@ import layers from "../../data/dataGenerator"
  */
 const getRectsCoordinates = () => {
 
-    const g = document.querySelectorAll('.node')
+    const lastNode = document.querySelector('#output .nodeRect')
+    lastNode.setAttribute('class', 'lastNode');
+    const g = document.querySelectorAll('.nodeRect')
+
 
     let nodesCoordinates = []
 
@@ -23,6 +27,8 @@ const getRectsCoordinates = () => {
         let y = rect.y + rect.height / 2
         nodesCoordinates.push({ x: x, y: y })
     })
+
+    console.log(nodesCoordinates)
 
     return nodesCoordinates;
 }
@@ -37,16 +43,30 @@ const linkEachRectToCoordinates = () => {
     let index = 0;
 
     const nodesCoordinates = getRectsCoordinates();
+    const outputLen = generateOutputData().length
 
-    layers.forEach((d) => {
+
+    const avantDernierLayerId = layers[layers.length - 2].id
+
+    layers.forEach((d, i) => {
         let tempLinks = []
-        for (let i = 0; i < d.nodes; i++) {
-            tempLinks.push({ coordinates: nodesCoordinates[index], layer: d.id })
-            index++
+        if (i === layers.length - 1) {
+            for (let i = 0; i < outputLen; i++) {
+                tempLinks.push({ coordinates: nodesCoordinates[index], layer: avantDernierLayerId })
+                index++
+            }
+            links.push(tempLinks)
+
+        } else {
+            for (let i = 0; i < d.nodes; i++) {
+                tempLinks.push({ coordinates: nodesCoordinates[index], layer: d.id })
+                index++
+            }
+            links.push(tempLinks)
         }
-        links.push(tempLinks)
     })
 
+    console.log(links)
 
     return links;
 }

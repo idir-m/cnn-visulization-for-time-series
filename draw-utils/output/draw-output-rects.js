@@ -35,9 +35,10 @@ const drawOutputRects = (selection) => {
         .data(descendingOutput)
         .enter()
         .append('rect')
+        .attr('class', 'nodeRect')
         .attr('width', rectSize.width)
         .attr('height', 10)
-        .attr('y', (d, i) => i * 10)
+        .attr('y', (d, i) => i * 11)
         .attr('fill', (d) => myColor(valueAccessor(d)))
         .attr('stroke', 'rgba(0, 0, 0, 0.5)')
 
